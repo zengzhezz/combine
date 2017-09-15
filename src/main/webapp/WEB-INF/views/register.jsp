@@ -147,6 +147,13 @@
         <div class="hint" style="margin-bottom: 5px;">注册标签: <button id="hide_label_table" style="margin-left: 10px; width: 70px;">隐藏表格</button></div>
         uuid : <input type="text" name="" id="label_uuid" style="margin-right: 20px;">
         名字 : <input type="text" name="" id="label_name" style="margin-right: 20px;">
+        标签类型:	<select name="type" id="type">
+
+                         <option value="0">老人</option>
+                         <option value="1">护工</option>
+                         <option value="2">保安</option>
+
+                    </select>
         <button id = "add_label">添加</button>
     </div>
     <div class="show_label" style="width:100%;">
@@ -154,6 +161,7 @@
             <tr class="first">
                 <td>mac</td>
                 <td>名称</td>
+                <td>标签类型(0老人,1护工,2保安)</td>
                 <td>操作</td>
             </tr>
             <tbody>
@@ -162,6 +170,9 @@
                     <th style="display:none;" class='item_id'>${item.id }</th>
                     <th class="">${item.uuid }</th>
                     <th class="">${item.uuidName }</th>
+                    <th class="">
+
+                            ${item.labelType }</th>
                     <th class=""><button class="delete_label">删除</button></th>
                 </tr>
             </c:forEach>
@@ -171,6 +182,7 @@
 </div>
 <script src="<%=path %>/statics/js/jquery-3.1.1.min.js" charset="utf-8"></script>
 <script>
+    var image_type1 = ["oldman","nurse","people"];
     $("#hide_mac_table").click(function(){
         $('.show_node').fadeToggle(0);
         if($('.show_node').is(":hidden")){
@@ -248,6 +260,7 @@
     $("#add_label").click(function(){
         var uuid = $("#label_uuid").val().toLowerCase();
         var uuidName = $("#label_name").val();
+        var type = $("#type").val();
         if(uuid=="" || uuidName==""){
             alert("uuid或名字不能为空");
             return;
@@ -258,7 +271,9 @@
             dataType : "json",
             data : {// 发送给数据库的数据
                 "uuid" : uuid,
-                "uuidName": uuidName
+                "uuidName": uuidName,
+                "type" : type
+
             },
             // 请求成功后的回调函数有两个参数
             success : function(data, textStatus) {

@@ -170,7 +170,7 @@
     // 图片的长宽和比例
     var image_width;
     var image_height;
-    var image_ratio = 0.65173;
+    var image_ratio = 0.4884;
     $(function(){
         //清除scenebox默认的右击事件
         document.getElementById("scene").oncontextmenu = function(event){
@@ -269,6 +269,7 @@
      * @param y
      */
     function addNodeByMsg(mac,name,nodeTop,nodeLeft){
+
         console.log(mac + ", " + name);
         var node = document.createElement("div"),
             img = document.createElement("div");
@@ -401,7 +402,7 @@
                 disX=event.clientX-this.offsetLeft,
                 disY=event.clientY-this.offsetTop;
             document.onmousemove = function(event){
-                fnMove(event,disX,disY,id);
+                fnMove(node,event,disX,disY,id);
             };
             document.onmouseup = function(){
                 document.onmousemove = null;
@@ -463,8 +464,8 @@
             }
         }
     }
-    function fnMove(event,posX,posY,id){
-        var oDrag = document.getElementById(id),
+    function fnMove(node,event,posX,posY,id){
+        var oDrag =node,
             left = event.clientX - posX,
             top = event.clientY - posY;
         oDrag.style.left = left + 'px';

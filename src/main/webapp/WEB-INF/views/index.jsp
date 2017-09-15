@@ -18,24 +18,33 @@
     <div class='title'>
         区间检测平台
     </div>
-    <div id="menu">
+
+      <div id="menu">
         <a href="register">注册页面</a>
         <a href="config" style="margin-left: 10px;">配置页面</a>
-        <a href="history" style="margin-left: 10px;">历史查询</a>
+        <a href="history" style="margin-left: 10px;">历史轨迹</a>
     </div>
   </div>
   <div class="scene">
     <img src="<%=path %>/statics/imgs/background3.jpg" alt="">
   </div>
+  <div class="checkbox">
+    选择要显示的类型:
+    <label><input id="show_oldman" type="checkbox" value="" checked/> 老人 </label>
+    <label><input id="show_nurse" type="checkbox" value="" checked/> 护工</label>
+    <label><input id="show_people" type="checkbox" value="" checked/>保安 </label>
+    <%--<label><input id="show_thief" type="checkbox" value="" checked/>重点人员 </label>
+    <label><input id="show_bike" type="checkbox" value="" checked/>电动车 </label>--%>
+  </div>
   <div class="flow_message">
-    <table>
-      <tr class='first'>
-        <td>时间</td>
+    <table class="my">
+     <%-- <tr class='first'>
+       <td>时间</td>
         <td>uuid</td>
         <td>姓名</td>
         <td>事件</td>
         <td>地点</td>
-      </tr>
+      </tr>--%>
     </table>
   </div>
   <script src="<%=path %>/statics/js/jquery-3.1.1.min.js" charset="utf-8"></script>

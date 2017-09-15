@@ -61,7 +61,10 @@ public class LineLocateThread extends Thread{
                         if(locate!=null){
                             DecimalFormat df = new DecimalFormat("0.0000");
                             // 发送位置数据到前端
-                            Websocket.sendMessageToAll("location,"+model.getUuid()+","+model.getUuidName()+
+                            Integer labelType = SpringContextHolder.getBean(LabelService.class).findLabelTypeByUuid(model.getUuid());
+                            String description = SpringContextHolder.getBean(LabelService.class).findDescriptionByUuid(model.getUuid());
+                            //sb.append(model.getUuid() + "," + model.getUuidName() + ","  + labelType + "," + description + ",");
+                            Websocket.sendMessageToAll("location,"+model.getUuid()+","+model.getUuidName()+ ","  + labelType + "," + "nothing"+
                                     "," + df.format(locate.getxAxis())+
                                     "," + df.format(locate.getyAxis()));
                             // 保存位置信息

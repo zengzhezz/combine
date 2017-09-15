@@ -56,7 +56,9 @@ public class RegisterController {
     public MessageInfo addLabel(HttpServletRequest request){
         String uuid = request.getParameter("uuid");
         String uuidName = request.getParameter("uuidName");
-        if(labelService.saveLabel(uuid, uuidName, "")){
+        String type = request.getParameter("type");
+        Integer typeint = Integer.parseInt(type);
+        if(labelService.saveLabel(uuid, uuidName, typeint,"")){
             return new MessageInfo(0, "success");
         }
         return new MessageInfo(1, "failed");

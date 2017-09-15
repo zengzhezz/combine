@@ -23,6 +23,9 @@ public class Label extends IdEntity {
     @Column(name="uuidName")
     private String uuidName;
 
+    @Column(name="label_type")
+    private Integer labelType;
+
     @Column(name="description")
     private String description;
 
@@ -50,4 +53,11 @@ public class Label extends IdEntity {
         this.description = description;
     }
 
+    public Integer getLabelType() {
+        return labelType;
+    }
+
+    public void setLabelType(Integer labelType) {
+        this.labelType = labelType;
+    }
 }

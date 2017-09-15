@@ -1,5 +1,7 @@
 package com.ibeacon.web.controller;
 
+import com.ibeacon.model.label.Label;
+import com.ibeacon.model.msginfo.MessageInfo;
 import com.ibeacon.model.node.Node;
 import com.ibeacon.model.node.ReNode;
 import com.ibeacon.service.label.LabelService;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,6 +67,76 @@ public class LabelController {
             sb.deleteCharAt(sb.length() - 1);
         }
         return sb.toString();
+    }
+    //new
+
+
+    @ResponseBody
+	@RequestMapping("/add_label")
+	public MessageInfo addLabel(HttpServletRequest request){
+		String uuid = request.getParameter("uuid");
+		String uuidName = request.getParameter("name");
+		String type = request.getParameter("type");
+		String description = request.getParameter("description");
+		if(labelService.checkLabelExist(uuid)){
+			return new MessageInfo(1, "�ñ�ǩ��uuid�Ѿ�����");
+		}else{
+			labelService.saveLabel(uuid, uuidName, Integer.valueOf(type), description);
+			return new MessageInfo(0, "success");
+		}
+	}
+
+
+    /**
+     * ɾ��ָ��uuid��Label
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/delete_label")
+    public MessageInfo delateLabel(HttpServletRequest request){
+        String uuid = request.getParameter("uuid");
+        if(labelService.deleteLabel(uuid)){
+            return new MessageInfo(0,"success");
+        }else{
+            return new MessageInfo(1, "ɾ��ʧ��...");
+        }
+    }
+
+
+   
+
+
+
+    @ResponseBody
+    @RequestMapping("/find_all")
+    public List<Label> findAllLabel(){
+        List<Label> list = labelService.findAllLabel();
+        return list;
+    }
+
+    /**
+     * �õ�uuid��labelType
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/get_labelType")
+    public String getLabelType(HttpServletRequest request){
+        String uuid = request.getParameter("uuid");
+        return String.valueOf(labelService.findLabelTypeByUuid(uuid));
+    }
+
+    /**
+     * �õ�uuid��Label
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/get_label")
+    public Label getLabel(HttpServletRequest request){
+        String uuid = request.getParameter("uuid");
+        return labelService.findLabelByUuid(uuid);
     }
 
 }

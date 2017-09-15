@@ -65,5 +65,10 @@ public class InOutDataController {
         model.addAttribute("inOutData", inOutlist);
         return "history";
     }
-
+    //new
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.POST, value = { "/get1inoutdata" })
+    public InOutData find1Data(HttpServletRequest request){
+        return inOutDataService.findOneInOutDataByUuid(request.getParameter("uuid"));
+    }
 }

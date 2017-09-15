@@ -76,19 +76,77 @@ public class ReceiveDataController {
             if(data.substring(0,2).equals(Constants.VERSION)){
                 if (nodeService.checkNodeExist(mac)) {
                     // 解析data
-                    for (int i = 2 * 5; i < data.length(); i = i + 6) {
-                        // 该字段为uuid
-                        String uuid = data.substring(i, i + 4);
-                        // 该字段为rssi, 16进制转10进制
-                        int rssi = Integer.parseInt(data.substring(i + 4, i + 6),16);
-                        String macName = nodeService.findNodeNameByMac(mac);
-                        String uuidName = labelService.findUuidNameByUuid(uuid);
-                        doAreaDetect(lut, mac, macName, uuid, uuidName, rssi);
+
+                        for(int i=2;i < data.length();){
+                            // 解析data
+                            int num = Integer.parseInt(data.substring(i,i+2),16);
+                            log.debug("标签数:"+num);
+                            i=i+2;
+                            String uuid1 = data.substring(i,i+4);
+                            i=i+4;
+
+                            for(int j=0;j<num;j++){
+                                String uuid2 = data.substring(i,i+4);
+                                String rssi = data.substring(i+4,i+6);
+                                String rssilast = getrssilast(rssi);
+                                int realrssi = Integer.parseInt(rssilast);
+                                String type = getType(rssi);
+                                String uuid =uuid1+uuid2;
+                                String macName = nodeService.findNodeNameByMac(mac);
+                                String uuidName = labelService.findUuidNameByUuid(uuid);
+                                doAreaDetect(lut, mac, macName, uuid, uuidName, realrssi);
+                               // log.debug("写入数据到ibeacon..."+uuid+","+rssi+","+type+","+lut);
+                              //  flowMsgService.saveFlowMsg(uuid, mac, rssilast, type, ConvertUtils.formatTimestamp(lut));
+                                i=i+6;
+                               // String uuidName = labelService.findUuidNameByUuid(uuid);
+
+
+                              //  log.debug("写入数据到originalBeaconList...");
+                              //  StaticVariables.originalBeaconList.add(new OriginBeaconModel(uuid,uuidName,mac,rssilast,ConvertUtils.formatTimestamp(lut),type));
+                            }
+
+
+
                     }
                     Websocket.sendMessageToAll(getLabelMsg(mac));
+
                 } else if(locateNodeService.checkNodeExist(mac)){
                     // 解析data
-                    for (int i = 2 * 5; i < data.length(); i = i + 6) {
+                    System.out.println("JINRU LOCATION");
+                    for(int i=2;i < data.length();){
+                        // 解析data
+                        int num = Integer.parseInt(data.substring(i,i+2),16);
+                        log.debug("标签数:"+num);
+                        i=i+2;
+                        String uuid1 = data.substring(i,i+4);
+                        i=i+4;
+
+                        for(int j=0;j<num;j++){
+                            String uuid2 = data.substring(i,i+4);
+                            String rssi = data.substring(i+4,i+6);
+                            String rssilast = getrssilast(rssi);
+                            int realrssi = Integer.parseInt(rssilast);
+                            String type = getType(rssi);
+                            String uuid =uuid1+uuid2;
+                            String macName = nodeService.findNodeNameByMac(mac);
+                            String uuidName = labelService.findUuidNameByUuid(uuid);
+
+                            i=i+6;
+
+                            // 值对rssi<100的值进行
+                            if(Integer.valueOf(rssi) <= 100){
+                                log.debug("写入数据到originalBeaconList...");
+                                StaticVariables.originalBeaconList.add(new OriginBeaconModel(uuid,uuidName,mac,rssi,ConvertUtils.formatTimestamp(lut)));
+                            }
+
+
+                        }
+
+
+
+                    }
+                  //  Websocket.sendMessageToAll(getLabelMsg(mac));
+                   /* for (int i = 2 * 5; i < data.length(); i = i + 6) {
                         // 该字段为uuid
                         String uuid = data.substring(i, i + 4);
                         // 该字段为rssi, 16进制转10进制
@@ -100,7 +158,7 @@ public class ReceiveDataController {
                             log.debug("写入数据到originalBeaconList...");
                             StaticVariables.originalBeaconList.add(new OriginBeaconModel(uuid,uuidName,mac,rssi,ConvertUtils.formatTimestamp(lut)));
                         }
-                    }
+                    }*/
                 } else {
                     log.debug("该数据对应的mac未注册:" + data);
                 }
@@ -179,4 +237,29 @@ public class ReceiveDataController {
         return "flow_msg,"+ConvertUtils.formatTimestamp(time)+","+uuid+","+uuidName+","+event+","+mac+","+macName;
     }
 
+    public String getType(String rssi){
+
+        int type;
+        type = Integer.parseInt(rssi.substring(0,1),16);
+        if(type>=8){
+            return "静止";
+        }
+        return "运动";
+    }
+    public String getrssilast(String rssi){
+        int type = Integer.parseInt(rssi.substring(0,1),16);
+        String rssilast;
+        if(type>=8){
+            int rssiint =Integer.parseInt(rssi.substring(0),16)-128;
+            rssilast = String.valueOf(rssiint);
+
+        }else{
+            int rssiint =Integer.parseInt(rssi.substring(0),16);
+            rssilast = String.valueOf(rssiint);
+        }
+        return rssilast;
+    }
+
+
 }
+

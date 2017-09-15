@@ -63,4 +63,10 @@ public class InOutDataService extends AbstractService {
                 "? order by lastUpdateTime asc", mac, start, end);
     }
 
+    //new
+    public InOutData findOneInOutDataByUuid(String uuid){
+        List<InOutData> list=  this.find("from InOutData where uuid = ? order by lastUpdateTime asc", uuid);
+        return list.get(0);
+    }
+
 }

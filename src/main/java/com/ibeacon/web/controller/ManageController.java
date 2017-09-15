@@ -50,8 +50,10 @@ public class ManageController {
     public String toConfig(Model model){
         List<ReNode> reNodeList = reNodeService.findAll();
         List<LocateReNode> locateReNodeList = locateReNodeService.findAll();
+        List<Label> LabelList = labelService.findAllLabel();
         model.addAttribute("nodes", reNodeList);
         model.addAttribute("locationNodes", locateReNodeList);
+        model.addAttribute("labels", LabelList);
         return "config";
     }
 

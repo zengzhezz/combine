@@ -15,13 +15,14 @@ public class LabelService extends AbstractService {
      * @param uuid
      * @param uuidName
      */
-    public boolean saveLabel(String uuid, String uuidName, String description){
+    public boolean saveLabel(String uuid, String uuidName, Integer type, String description){
         if(checkLabelExist(uuid)){
             return false;
         }
         Label label = new Label();
         label.setUuid(uuid);
         label.setUuidName(uuidName);
+        label.setLabelType(type);
         label.setDescription(description);
         this.save(label);
         return true;
@@ -118,5 +119,12 @@ public class LabelService extends AbstractService {
         }
         return "";
     }
-
+//new
+public Integer findLabelTypeByUuid(String uuid){
+    Label label = this.findLabelByUuid(uuid);
+    if(label!=null){
+        return label.getLabelType();
+    }
+    return 0;
+}
 }
