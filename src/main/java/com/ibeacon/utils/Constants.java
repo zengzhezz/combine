@@ -7,7 +7,7 @@ package com.ibeacon.utils;
  */
 public class Constants {
 	// 定义版本号
-	public static final String VERSION = "A0";
+	public static final String VERSION = "a0";
 	// 定义接收到的数据包类型-->正常数据包
 	public static final String PACKAGE_NORMAL = "00";
 	// 定义接收到的数据包类型-->心跳数据包

@@ -15,7 +15,7 @@ var socket = new WebSocket(socket_context + '/websocket');
 
 $(function() {
     // 得到图片的宽高
-    image_width = document.body.clientWidth;
+    image_width = document.body.clientWidth*0.88;
     image_height = image_width * image_ratio;
 
     // 从服务器获取所有节点并显示
@@ -164,7 +164,7 @@ function getAllNode() {
                 var mac = data[index].mac,
                     name = data[index].name,
                     nodeTop = data[index].nodeTop * image_height + 50,
-                    nodeLeft = data[index].nodeLeft * image_width;
+                    nodeLeft = data[index].nodeLeft * image_width+image_width*0.12;
                 addNodeByMsg(mac, name, nodeTop, nodeLeft);
             });
         }
@@ -187,7 +187,7 @@ function getAllLocationNode(){
                 var mac = data[index].mac,
                     name = data[index].name,
                     nodeTop = data[index].nodeTop * image_height + 50,
-                    nodeLeft = data[index].nodeLeft * image_width;
+                    nodeLeft = data[index].nodeLeft * image_width+image_width*0.12;
                 addLocationNodeByMsg(mac, name, nodeTop, nodeLeft);
             });
         }
@@ -294,7 +294,7 @@ function addLabel(uuid, uuidName, labelType, description, left, top) {
             + "/statics/imgs/"+ image_string+ ".png'></img><div class='label_msg'><div class='tria'></div><div class='label_p'><p>姓名:"
             + uuidName + "<br/>"+description+"</p></div></div></div>");
         $('.label_' + uuid).css("position", "absolute");
-        $('.label_' + uuid).css("left", (image_width * left - 8) + "px");
+        $('.label_' + uuid).css("left", (image_width * left +image_width*0.12- 8) + "px");
         $('.label_' + uuid).css("top", (image_height * top + 50 - 10) + "px");
         if(!$('#show_'+image_string).is(':checked')){
             $('.label_' + uuid).hide();
@@ -386,7 +386,7 @@ function addLabel(uuid, uuidName, labelType, description, left, top) {
             "<tr class='second'><td><div class='new_message_hint'><em>"+uuid+"</em></div>" + uuidname + "</td><td>" + random_num + "</td><td id='xinlv'>"
             + random_num + "</td><td id='maibo'>" + random_num + "</td><td>" + lastuptime + "</td><div></div></tr>");
 
-        setInterval(refresh,1000);
+        setInterval(refresh,1000*60*10);
                 function refresh(){
                     var xinlv = 60+parseInt(40*Math.random());
                     var maibo = 60+parseInt(40*Math.random());

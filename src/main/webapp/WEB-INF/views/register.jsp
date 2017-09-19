@@ -11,6 +11,15 @@
     <base href="<%=basePath%>">
     <title>注册页面</title>
     <link rel="stylesheet" type="text/css" href="<%=path %>/statics/css/restcss.css">
+    <!--2017-9-17改byGuwei-begin-->
+    <link rel="stylesheet" href="<%=path%>/statics/css/mystyle.css">
+    <link rel="stylesheet" href="<%=path%>/statics/css/font-awesome-4.7.0/css/font-awesome.css" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/statics/css/turnpage/paging.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/statics/css/media-queries.css"/>
+    <script src="<%=path%>/statics/js/jquery-1.7.2.min.js"></script>
+    <script src="<%=path%>/statics/js/myjs.js"></script>
+    <script src="<%=path%>/statics/date/time.js"></script>
+    <!--2017-9-17改byGuwei-end-->
     <style type="text/css">
         *{
             margin: 0;
@@ -19,7 +28,7 @@
         #header {
             height: 50px;
             line-height: 50px;
-            background: #edf6fa;
+            background:#64a5bab3;
         }
         #header .title{
             text-align: center;
@@ -77,6 +86,8 @@
             padding-right: 30px;
         }
     </style>
+
+
 </head>
 <body>
 <div id="header">
@@ -88,14 +99,30 @@
         <a href="config" style="margin-left: 10px;">配置页面</a>
     </div>
 </div>
-<div id="register_mac">
-    <div class="menu" style="margin: 10px 20px;">
+<!--2017-9-17改byGuwei-begin-->
+<div id="sidebar"  style="width:12%;top: 50px;">
+    <ul class="menu" style="width:100%">
+        <li class="first"><span>主菜单</span><i></i></li>
+        <li><a href="index"> <i class="fa fa-address-book-o "></i><span>区间检测</span></a></li>
+        <li class="current"><a href="register"> <i class="fa fa-book"></i><span>注册页面</span></a></li>
+        <li><a href="config"><i class="fa fa-calendar-check-o"></i><span>配置页面</span></a></li>
+        <li><a href="history"><i class="fa fa-bar-chart"></i><span>历史轨迹</span></a></li>
+
+
+    </ul>
+
+</div>
+<!--2017-9-17改byGuwei-end-->
+
+<div id="register_mac" style="position:relative; left:12%; top:60px; width: 88%;">
+    <div class="menu" style="height:70px; margin-top: 10px;">
         <div class="hint" style="margin-bottom: 5px;">注册区域检测节点: <button id="hide_mac_table" style="margin-left: 10px; width: 70px;">隐藏表格</button></div>
-        mac : <input type="text" name="" id="mac" style="margin-right: 20px;">
-        名称 : <input type="text" name="" id="mac_name" style="margin-right: 20px;">
-        <button id = "add_mac">添加</button>
+        <div style="width:500px;">
+        mac : <input type="text" name="" id="mac">
+        名称 : <input type="text" name="" id="mac_name" >
+        <button id = "add_mac">添加</button></div>
     </div>
-    <div class="show_node">
+    <div class="show_node" style="width: 100%;">
         <table>
             <tr class="first">
                 <td>mac</td>
@@ -115,14 +142,15 @@
         </table>
     </div>
 </div>
-<div id="register_location_mac">
-    <div class="menu" style="margin: 10px 20px;">
+<div id="register_location_mac"  style="position:relative; left:12%;top:60px;width: 88%;">
+    <div class="menu"  style="height:70px; margin-top: 10px;">
         <div class="hint" style="margin-bottom: 5px;">注册人员定位节点: <button id="hide_location_mac_table" style="margin-left: 10px; width: 70px;">隐藏表格</button></div>
-        mac : <input type="text" name="" id="location_mac" style="margin-right: 20px;">
-        名称 : <input type="text" name="" id="location_mac_name" style="margin-right: 20px;">
-        <button id = "add_location_mac">添加</button>
+        <div style="width:500px;">
+        mac : <input type="text" name="" id="location_mac">
+        名称 : <input type="text" name="" id="location_mac_name">
+            <button id = "add_location_mac">添加</button></div>
     </div>
-    <div class="show_location_node">
+    <div class="show_location_node" style="width: 100%;">
         <table>
             <tr class="first">
                 <td>mac</td>
@@ -142,11 +170,12 @@
         </table>
     </div>
 </div>
-<div id="register_label">
-    <div class="menu" style="margin: 10px 20px;">
+<div id="register_label"  style="position:relative; left:12%; top:60px; width: 88%;">
+    <div class="menu"  style="height:70px; margin-top: 10px;">
         <div class="hint" style="margin-bottom: 5px;">注册标签: <button id="hide_label_table" style="margin-left: 10px; width: 70px;">隐藏表格</button></div>
-        uuid : <input type="text" name="" id="label_uuid" style="margin-right: 20px;">
-        名字 : <input type="text" name="" id="label_name" style="margin-right: 20px;">
+        <div style="width:700px;">
+        uuid : <input type="text" name="" id="label_uuid">
+        名字 : <input type="text" name="" id="label_name">
         标签类型:	<select name="type" id="type">
 
                          <option value="0">老人</option>
@@ -154,9 +183,9 @@
                          <option value="2">保安</option>
 
                     </select>
-        <button id = "add_label">添加</button>
+            <button id = "add_label">添加</button></div>
     </div>
-    <div class="show_label" style="width:100%;">
+    <div class="show_label" style="width: 100%;">
         <table>
             <tr class="first">
                 <td>mac</td>

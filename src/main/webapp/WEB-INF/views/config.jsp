@@ -11,6 +11,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>配置页面</title>
     <link rel="stylesheet" type="text/css" href="<%=path %>/statics/css/restcss.css">
+    <!--2017-9-17改byGuwei-begin-->
+    <link rel="stylesheet" href="<%=path%>/statics/css/mystyle.css">
+    <link rel="stylesheet" href="<%=path%>/statics/css/font-awesome-4.7.0/css/font-awesome.css" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/statics/css/turnpage/paging.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/statics/css/media-queries.css"/>
+    <script src="<%=path%>/statics/js/jquery-1.7.2.min.js"></script>
+    <script src="<%=path%>/statics/js/myjs.js"></script>
+    <script src="<%=path%>/statics/date/time.js"></script>
+    <!--2017-9-17改byGuwei-end-->
     <style type="text/css">
         *{
             margin: 0;
@@ -19,7 +28,7 @@
         #header {
             height: 50px;
             line-height: 50px;
-            background: #edf6fa;
+            background: #64a5bab3;
         }
         #header .title{
             text-align: center;
@@ -39,7 +48,7 @@
         }
 
         .config_msg{
-            padding: 0px 10px;
+            padding: 0px 0px;
             line-height: 40px;
             padding-bottom: 10px;
         }
@@ -47,7 +56,7 @@
             padding: 2px;
         }
         .scene{
-            width: 100%;
+            width: 88%;
         }
         img {
             width: inherit;
@@ -135,7 +144,7 @@
     </style>
 </head>
 <body>
-<div id="header">
+<div id="header" style="background: #64a5bab3;">
     <div class='title' style="display: inline">
         配置页面
     </div>
@@ -144,10 +153,26 @@
         <a href="register" style="margin-left: 10px;">注册页面</a>
     </div>
 </div>
-<div id="scene" class="scene">
-    <img src="<%=path %>/statics/imgs/background3.jpg" alt="">
+
+<!--2017-9-17改byGuwei-begin-->
+<div id="sidebar" style="width:12%;top: 50px;">
+    <ul class="menu"  style="width:100%;">
+        <li class="first"><span>主菜单</span><i></i></li>
+        <li><a href="index"> <i class="fa fa-address-book-o "></i><span>区间检测</span></a></li>
+        <li><a href="register"> <i class="fa fa-book"></i><span>注册页面</span></a></li>
+        <li class="current"><a href="config"><i class="fa fa-calendar-check-o"></i><span>配置页面</span></a></li>
+        <li><a href="history"><i class="fa fa-bar-chart"></i><span>历史轨迹</span></a></li>
+
+
+    </ul>
+
 </div>
-<div class="config_msg">
+<!--2017-9-17改byGuwei-end-->
+
+<div id="scene" class="scene" style="width: 88%; position:relative; left:12%;top:50px;">
+    <img style="width: 100%;" src="<%=path %>/statics/imgs/background3.jpg" alt="">
+</div>
+<div class="config_msg" style="width: 88%; position:relative; left:12%;top:35px;">
     <div style="border-bottom: 1px dashed black;">在页面上添加节点:</div>
     <em>选择要添加的区域检测节点：</em>
     <select id="nodes" style="margin-left: 20px;">
@@ -177,7 +202,7 @@
             event.returnValue = false;
         };
         //得到图片的宽高
-        image_width = document.body.clientWidth;
+        image_width = document.body.clientWidth*0.88;
         image_height = image_width * image_ratio;
         getAllNode();
         getAllLocationNode();
@@ -197,7 +222,7 @@
                 }
             });
             if(flag == 0) {
-                addNodeByMsg(mac, name, 100, 100);
+                addNodeByMsg(mac, name, 300, 300);
             }
         });
         $('.add_location_node_btn').click(function(){
@@ -213,7 +238,7 @@
                 }
             });
             if(flag == 0) {
-                addLocationNodeByMsg(mac, name, 100, 100);
+                addLocationNodeByMsg(mac, name, 300, 300);
             }
         });
     });
@@ -233,7 +258,7 @@
                     var mac = data[index].mac,
                         name = data[index].name,
                         nodeTop = data[index].nodeTop * image_height + 50,
-                        nodeLeft = data[index].nodeLeft * image_width;
+                        nodeLeft = data[index].nodeLeft * image_width+image_width*0.12;
                     addNodeByMsg(mac, name, nodeTop, nodeLeft);
                 });
             }
@@ -255,7 +280,7 @@
                     var mac = data[index].mac,
                         name = data[index].name,
                         nodeTop = data[index].nodeTop * image_height + 50,
-                        nodeLeft = data[index].nodeLeft * image_width;
+                        nodeLeft = data[index].nodeLeft * image_width+image_width*0.12;
                     addLocationNodeByMsg(mac, name, nodeTop, nodeLeft);
                 });
             }
@@ -346,7 +371,7 @@
                 mac: $(node).attr("id"),
                 name: $(node).attr("name"),
                 nodeTop: (((node.style.top).replace("px","") - 50)/image_height).toFixed(4),
-                nodeLeft: (((node.style.left).replace("px",""))/image_width).toFixed(4)
+                nodeLeft: (((node.style.left).replace("px","")-image_width*0.12)/image_width).toFixed(4)
             }
             jsonarray.push(arr);
         }
@@ -368,7 +393,7 @@
                 mac: $(node).attr("id"),
                 name: $(node).attr("name"),
                 nodeTop: (((node.style.top).replace("px","") - 50)/image_height).toFixed(4),
-                nodeLeft: (((node.style.left).replace("px",""))/image_width).toFixed(4)
+                nodeLeft: (((node.style.left).replace("px","")-image_width*0.12)/image_width).toFixed(4)
             }
             jsonarray2.push(arr);
         }

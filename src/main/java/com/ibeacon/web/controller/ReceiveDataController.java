@@ -110,7 +110,7 @@ public class ReceiveDataController {
                     }
                     Websocket.sendMessageToAll(getLabelMsg(mac));
 
-                } else if(locateNodeService.checkNodeExist(mac)){
+                } else if(locateReNodeService.checkReNodeExist(mac)){
                     // 解析data
                     System.out.println("JINRU LOCATION");
                     for(int i=2;i < data.length();){
@@ -134,9 +134,9 @@ public class ReceiveDataController {
                             i=i+6;
 
                             // 值对rssi<100的值进行
-                            if(Integer.valueOf(rssi) <= 100){
+                            if(realrssi <= 100){
                                 log.debug("写入数据到originalBeaconList...");
-                                StaticVariables.originalBeaconList.add(new OriginBeaconModel(uuid,uuidName,mac,rssi,ConvertUtils.formatTimestamp(lut)));
+                                StaticVariables.originalBeaconList.add(new OriginBeaconModel(uuid,uuidName,mac,rssilast,ConvertUtils.formatTimestamp(lut)));
                             }
 
 
@@ -182,7 +182,7 @@ public class ReceiveDataController {
      * @param uuidName
      * @param rssi
      */
-    public void doAreaDetect(String lut, String mac, String macName, String uuid, String uuidName, int rssi){
+    public void  doAreaDetect(String lut, String mac, String macName, String uuid, String uuidName, int rssi){
         // calculate the real distance
         double distance = Algorithm.calDistanceWithRssi(rssi);
         int inout = 0; // 定义进出标志，0表示无进出，1表示进入，2表示离开

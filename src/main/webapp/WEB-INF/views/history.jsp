@@ -12,6 +12,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" type="text/css" href="<%=path %>/statics/css/restcss.css">
     <link rel="stylesheet" type="text/css"
 	href="<%=path %>/statics/plugins/huatiao/css/style.css" />
+	  <!--2017-9-17改byGuwei-begin-->
+	  <link rel="stylesheet" href="<%=path%>/statics/css/mystyle.css">
+	  <link rel="stylesheet" href="<%=path%>/statics/css/font-awesome-4.7.0/css/font-awesome.css" type="text/css"/>
+	  <link rel="stylesheet" type="text/css" href="<%=path%>/statics/css/turnpage/paging.css"/>
+	  <link rel="stylesheet" type="text/css" href="<%=path%>/statics/css/media-queries.css"/>
+	  <script src="<%=path%>/statics/js/jquery-1.7.2.min.js"></script>
+	  <script src="<%=path%>/statics/js/myjs.js"></script>
+	  <script src="<%=path%>/statics/date/time.js"></script>
+	  <!--2017-9-17改byGuwei-end-->
     <style type="text/css">
     	body, html {
 			width: 100%;
@@ -110,16 +119,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </style>
   </head>
   <body width="150%">
-  	<div id="header">
+  	<div id="header" style="background: #64a5bab3;">
 	  	<div class='title'>
 			慧联人员定位平台
 		</div>
   	</div>
-  	<div class="scene">
+	<!--2017-9-17改byGuwei-begin-->
+	<div id="sidebar" style="width:12% ;top: 50px;">
+		<ul class="menu" style="width:100%">
+			<li class="first"><span>主菜单</span><i></i></li>
+			<li><a href="index"> <i class="fa fa-address-book-o "></i><span>区间检测</span></a></li>
+			<li><a href="register"> <i class="fa fa-book"></i><span>注册页面</span></a></li>
+			<li><a href="config"><i class="fa fa-calendar-check-o"></i><span>配置页面</span></a></li>
+			<li class="current"><a href="history"><i class="fa fa-bar-chart"></i><span>历史轨迹</span></a></li>
+
+
+		</ul>
+
+	</div>
+	<!--2017-9-17改byGuwei-end-->
+  	<div class="scene" style="width: 88%;position:relative; left:12%;top:50px;" >
   	  <canvas id='canvas'></canvas>
     </div>
+
     <div id="label"><img src="<%=path %>/statics/imgs/man.png" width="20px;" id='label_img'><div class='label_msg_wrapper'><div class="trai"></div><div class='label_p'></div></div></div>
-    <div id="map_search">
+    <div id="map_search" style="width: 88%; position:relative; left:12%;top:60px;">
 	  	<div style="margin-left:10px;">
 			uuid:
 			<select id="search_uuid"></select>
@@ -171,7 +195,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 		
 		var image_ratio =  0.4884;
-		var image_width = document.body.clientWidth;
+		var image_width = document.body.clientWidth*0.88;
 		var image_height = image_width * image_ratio;
 		var movespeed;
 		var canvas = document.getElementById("canvas");
@@ -269,8 +293,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						success : function(data, textStatus) {
 							if(data != null && data.length != 0){
 								$.each(data,function(index, item) {
-									var left = data[index].locationLeft * image_width, 
-										top = data[index].locationTop * image_height,
+									var left = data[index].locationLeft * image_width,
+										top = data[index].locationTop * image_height+50,
 										time = data[index].createTime;
 									vertices.push({
 									    x: left,
@@ -370,9 +394,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    ctx.lineTo(points[t].x, points[t].y);
 		    ctx.stroke();
 		    $('.label_p').children().remove();
-			$('.label_p').append("<p>姓名:"+my_label.uuidName+"<br/>"+my_label.description+"时间:"+points[t].time+"<br/></p>");
-		   	$('#label').css("left", points[t].x - 10);
-		   	$('#label').css("top", points[t].y + 24);
+			$('.label_p').append("<p>姓名:"+my_label.uuidName+"<br/>"+"时间:"+points[t].time+"<br/></p>");
+		   	$('#label').css("left", points[t].x + image_width * 0.12);
+		   	$('#label').css("top", points[t].y);
 		    // increment "t" to get the next waypoint
 		    t++;
 		}
