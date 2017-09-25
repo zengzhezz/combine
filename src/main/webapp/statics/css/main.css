@@ -6,7 +6,7 @@
 #header {
     height: 50px;
     line-height: 50px;
-    background: #64a5bab3;
+    background:rgb(181, 217, 228);;
 }
 
 a , a:link {
@@ -17,10 +17,10 @@ a , a:link {
 #header .title{
     display: inline;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 2.0em;
     letter-spacing: .2em;
     font-weight: 400;
-    margin-left: 60px;
+    margin-left: 190px;
 }
 
 #menu {

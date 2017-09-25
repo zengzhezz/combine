@@ -34,6 +34,15 @@ $(function() {
             $('#show_node').val('显示节点');
         }
     })
+    $('#show_location_node').click(function(){
+        if($('.location_node').is(':hidden')){
+            $('.location_node').show();
+            $('#show_location_node').val('隐藏节点');
+        }else{
+            $('.location_node').hide();
+            $('#show_location_node').val('显示节点');
+        }
+    })
     $("#show_log").click(function(){
         if($('.flowmsg').is(':hidden')){
             $('.flowmsg').show();

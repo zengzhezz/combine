@@ -64,7 +64,8 @@
         table {
             width: inherit;
             border-collapse:collapse;
-            border: 2px solid #000;
+            border: 1px solid #a7c0d0;
+           /* border: 1px solid #000;*/
             text-align: center;
         }
         table td , th {
@@ -90,7 +91,7 @@
 
 </head>
 <body>
-<div id="header">
+<div id="header" >
     <div class='title' style="display: inline">
         注册页面
     </div>
@@ -103,7 +104,7 @@
 <div id="sidebar"  style="width:12%;top: 50px;">
     <ul class="menu" style="width:100%">
         <li class="first"><span>主菜单</span><i></i></li>
-        <li><a href="index"> <i class="fa fa-address-book-o "></i><span>区间检测</span></a></li>
+        <li><a href="index"> <i class="fa fa-address-book-o "></i><span>实时显示</span></a></li>
         <li class="current"><a href="register"> <i class="fa fa-book"></i><span>注册页面</span></a></li>
         <li><a href="config"><i class="fa fa-calendar-check-o"></i><span>配置页面</span></a></li>
         <li><a href="history"><i class="fa fa-bar-chart"></i><span>历史轨迹</span></a></li>
@@ -114,7 +115,7 @@
 </div>
 <!--2017-9-17改byGuwei-end-->
 
-<div id="register_mac" style="position:relative; left:12%; top:60px; width: 88%;">
+<div id="register_mac" style="position:relative; left:13%; top:50px; width: 87%;border: 1px solid #a7c0d0;">
     <div class="menu" style="height:70px; margin-top: 10px;">
         <div class="hint" style="margin-bottom: 5px;">注册区域检测节点: <button id="hide_mac_table" style="margin-left: 10px; width: 70px;">隐藏表格</button></div>
         <div style="width:500px;">
@@ -124,7 +125,7 @@
     </div>
     <div class="show_node" style="width: 100%;">
         <table>
-            <tr class="first">
+            <tr class="first" >
                 <td>mac</td>
                 <td>名称</td>
                 <td>操作</td>
@@ -142,7 +143,7 @@
         </table>
     </div>
 </div>
-<div id="register_location_mac"  style="position:relative; left:12%;top:60px;width: 88%;">
+<div id="register_location_mac"  style="position:relative; left:13%;top:50px;width: 87%;border: 1px solid #a7c0d0;">
     <div class="menu"  style="height:70px; margin-top: 10px;">
         <div class="hint" style="margin-bottom: 5px;">注册人员定位节点: <button id="hide_location_mac_table" style="margin-left: 10px; width: 70px;">隐藏表格</button></div>
         <div style="width:500px;">
@@ -170,7 +171,7 @@
         </table>
     </div>
 </div>
-<div id="register_label"  style="position:relative; left:12%; top:60px; width: 88%;">
+<div id="register_label"  style="position:relative; left:13%; top:50px; width: 87%;border: 1px solid #a7c0d0;">
     <div class="menu"  style="height:70px; margin-top: 10px;">
         <div class="hint" style="margin-bottom: 5px;">注册标签: <button id="hide_label_table" style="margin-left: 10px; width: 70px;">隐藏表格</button></div>
         <div style="width:700px;">

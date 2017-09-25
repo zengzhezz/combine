@@ -144,7 +144,7 @@
     </style>
 </head>
 <body>
-<div id="header" style="background: #64a5bab3;">
+<div id="header"  style="background: rgb(181, 217, 228);">
     <div class='title' style="display: inline">
         配置页面
     </div>
@@ -158,7 +158,7 @@
 <div id="sidebar" style="width:12%;top: 50px;">
     <ul class="menu"  style="width:100%;">
         <li class="first"><span>主菜单</span><i></i></li>
-        <li><a href="index"> <i class="fa fa-address-book-o "></i><span>区间检测</span></a></li>
+        <li><a href="index"> <i class="fa fa-address-book-o "></i><span>实时显示</span></a></li>
         <li><a href="register"> <i class="fa fa-book"></i><span>注册页面</span></a></li>
         <li class="current"><a href="config"><i class="fa fa-calendar-check-o"></i><span>配置页面</span></a></li>
         <li><a href="history"><i class="fa fa-bar-chart"></i><span>历史轨迹</span></a></li>
